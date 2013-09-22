@@ -16,20 +16,23 @@ limitations under the License.
 //A good 80% of this app is from the Android SDK home app sample
 package com.mikedg.android.glass.launchy;
 
+import java.util.ArrayList;
+
 import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemSelectedListener;
-import android.widget.ListView;
+import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuItem;
 
 public class MainActivity extends Activity {
 
     private AppHelper mAppHelper;
+    
+    private ArrayList<ApplicationInfo> applications = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,25 +41,10 @@ public class MainActivity extends Activity {
 
         mAppHelper = new AppHelper(this);
         mAppHelper.loadApplications(true);
-
-        mAppHelper.bindApplications();
+        applications = mAppHelper.getApplications();
         mAppHelper.registerIntentReceivers();
 
         // setupTestReceiver();
-
-        final ListView list = (ListView) findViewById(android.R.id.list);
-        list.setOnItemSelectedListener(new OnItemSelectedListener() {
-
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                list.smoothScrollToPositionFromTop(position, 0);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> arg0) {
-
-            }
-        });
 
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(Intent.ACTION_PACKAGE_ADDED);
@@ -77,6 +65,49 @@ public class MainActivity extends Activity {
             mAppHelper.loadApplications(false);
         }
     };
+    
+    /**
+     * Handle the tap event from the touchpad.
+     */
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+      switch (keyCode) {
+      // Handle tap events.
+      case KeyEvent.KEYCODE_DPAD_CENTER:
+      case KeyEvent.KEYCODE_ENTER:
+    	  showAppsMenu();
+        return true;
+      default:
+        return super.onKeyDown(keyCode, event);
+      }
+    }    
+    
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+    	
+    	menu.clear();
+    	for(int i = 0;i < applications.size();i++){
+    		menu.add(applications.get(i).title);
+    	}   	
+    	return true;
+    }
+    
+    
+    @Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+    	String title = (String) item.getTitle();
+    	for(ApplicationInfo app : applications){
+    		if(title.contentEquals(app.title)){
+    			startActivity(app.intent);
+    		}
+    	}   	
+    	return true;
+    }
+    
+    private void showAppsMenu(){
+    	this.openOptionsMenu();
+    }
+    
 
     // Just some junk I was investigating
     // private void setupTestReceiver() {

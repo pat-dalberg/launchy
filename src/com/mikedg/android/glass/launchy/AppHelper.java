@@ -19,6 +19,7 @@ import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -45,12 +46,7 @@ public class AppHelper {
 
     public AppHelper(Activity activity) {
         mActivity = activity;
-
-        mRobotoLight = Typeface.createFromAsset(activity.getAssets(), "fonts/Roboto-Light.ttf");
-
         setupExclusions();
-
-        ((TextView) activity.findViewById(android.R.id.text1)).setTypeface(mRobotoLight);
     }
 
     private void setupExclusions() {
@@ -155,7 +151,7 @@ public class AppHelper {
             bindApplications();
         }
     }
-
+    
     /**
      * GridView adapter to show the list of all installed applications.
      */
@@ -271,6 +267,10 @@ public class AppHelper {
             ApplicationInfo app = (ApplicationInfo) parent.getItemAtPosition(position);
             mActivity.startActivity(app.intent);
         }
+    }
+    
+    public ArrayList<ApplicationInfo> getApplications(){
+    	return mApplications;
     }
 
     public void onDestroy() {
