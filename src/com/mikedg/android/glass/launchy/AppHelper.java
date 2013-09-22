@@ -9,7 +9,7 @@
  * language governing permissions and limitations under the License.
  */
 // Original code snipped from the Android Home SDK Sample app
-package com.mikedg.android.glass.launchy; 
+package com.mikedg.android.glass.launchy;
 
 import android.app.Activity;
 import android.content.*;
