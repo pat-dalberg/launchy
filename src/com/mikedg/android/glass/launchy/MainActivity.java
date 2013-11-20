@@ -109,29 +109,4 @@ public class MainActivity extends Activity {
     }
     
 
-    // Just some junk I was investigating
-    // private void setupTestReceiver() {
-    // BroadcastReceiver receiver = new BroadcastReceiver() {
-    // @Override
-    // public void onReceive(Context context, Intent intent) {
-    // Log.d("Launcher", "********((((((");
-    // Log.d("Launcher", "********((((((");
-    // Log.d("Launcher", "********((((((");
-    // Log.d("Launcher", "********((((((");
-    // Log.d("Launcher", "********((((((");
-    // Log.d("Launcher", "********((((((");
-    // Log.d("Launcher", "********((((((");
-    // Log.d("Launcher", "********((((((");
-    // Log.d("Launcher", "********((((((");
-    // Log.d("Launcher", "********((((((");
-    // Log.d("Launcher", "********((((((");
-    // }
-    // };
-    // IntentFilter filter = new IntentFilter();
-    // filter.addAction("com.google.glass.LOG_HEAD_GESTURE");
-    // filter.addAction("android.intent.action.ACTION_POWER_CONNECTED");
-    // filter.addAction("com.google.glass.action.TOUCH_GESTURE"); //not working? wtf... said, I was
-    // hoping to be able to itnercept this, nothing in logs
-    // registerReceiver(receiver, filter);
-    // }
 }

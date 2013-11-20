@@ -28,7 +28,7 @@
                 <action android:name="com.google.android.glass.action.VOICE_TRIGGER" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-            <meta-data android:name="com.google.android.glass.voice_trigger" android:resource="@string/voice_menu_trigger" />
+            <meta-data android:name="com.google.android.glass.VoiceTrigger" android:resource="@xml/voice_trigger" />
         </activity>
         <activity android:name="com.mikedg.android.glass.launchy.LaunchActivity" android:clearTaskOnLaunch="true" android:launchMode="singleInstance">
 			<intent-filter>
